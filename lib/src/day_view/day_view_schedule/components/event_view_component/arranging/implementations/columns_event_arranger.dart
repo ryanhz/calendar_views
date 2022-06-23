@@ -1,6 +1,5 @@
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/day_view.dart';
+import 'package:meta/meta.dart';
 
 /// [EventViewArranger] that arranges events into columns.
 @immutable
@@ -44,7 +43,7 @@ void _sortEvents(List<StartDurationItem> events) {
 }
 
 List<_Column> _makeColumns(List<StartDurationItem> events) {
-  List<_Column> columns = new List();
+  List<_Column> columns = [] ;
 
   columns.add(
     new _Column(),
@@ -75,9 +74,9 @@ List<_Column> _makeColumns(List<StartDurationItem> events) {
 }
 
 List<ArrangedEvent> _columnsToArrangedEvents({
-  @required List<_Column> columns,
-  @required ArrangerConstraints constraints,
-  @required bool extendColumns,
+  required List<_Column> columns,
+  required ArrangerConstraints constraints,
+  required bool extendColumns,
 }) {
   int determineWidthInColumns(int columnNumber, _Reservation reservation) {
     int widthInColumns = 1;
@@ -142,7 +141,7 @@ class _Reservation {
 }
 
 class _Column {
-  List<_Reservation> reservations = new List();
+  List<_Reservation> reservations = [] ;
 
   bool isReservationAvailable(_Reservation reservation) {
     for (_Reservation alreadyPlacedReservation in reservations) {

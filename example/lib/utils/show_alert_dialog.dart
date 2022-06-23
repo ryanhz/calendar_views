@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 void showAlertDialog({
-  @required BuildContext context,
+    BuildContext? context,
   String title = "Alert",
-  @required String message,
+   required String message,
 }) {
   assert(title != null);
-  assert(message != null);
+  
 
   showDialog(
-    context: context,
+    context: context!,
     builder: (context) => new AlertDialog(
           title: new Text(title),
           content: new SingleChildScrollView(
             child: new Text(message),
           ),
           actions: <Widget>[
-            new FlatButton(
+            new ElevatedButton(
               child: new Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();

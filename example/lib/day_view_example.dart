@@ -1,16 +1,15 @@
+import 'package:calendar_views/day_view.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-
-import 'package:calendar_views/day_view.dart';
 
 import 'utils/all.dart';
 
 @immutable
 class Event {
   Event({
-    @required this.startMinuteOfDay,
-    @required this.duration,
-    @required this.title,
+    required this.startMinuteOfDay,
+    required this.duration,
+    required this.title,
   });
 
   final int startMinuteOfDay;
@@ -46,8 +45,8 @@ class DayViewExample extends StatefulWidget {
 }
 
 class _DayViewExampleState extends State<DayViewExample> {
-  DateTime _day0;
-  DateTime _day1;
+  late DateTime _day0;
+  late DateTime _day1;
 
   @override
   void initState() {

@@ -1,6 +1,5 @@
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/src/_internal_date_time/all.dart';
+import 'package:meta/meta.dart';
 
 import 'day_of_month.dart';
 
@@ -8,10 +7,9 @@ import 'day_of_month.dart';
 @immutable
 class MonthViewDaysGenerator {
   MonthViewDaysGenerator({
-    @required this.month,
-    @required this.firstWeekday,
-  })  : assert(month != null),
-        assert(firstWeekday != null && isWeekdayValid(firstWeekday));
+    required this.month,
+    required this.firstWeekday,
+  })  : assert( isWeekdayValid(firstWeekday));
 
   final Month month;
 

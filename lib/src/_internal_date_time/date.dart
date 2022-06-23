@@ -14,8 +14,7 @@ class Date {
     this.year,
     this.month,
     this.day,
-  )   : assert(year != null),
-        assert(month != null && isMonthValid(month)),
+  )   : assert(isMonthValid(month)),
         assert(day != null && day >= 1 && day <= 31);
 
   /// Creates a new Date from [DateTime].
@@ -95,9 +94,9 @@ class Date {
 
   /// Creates a new Date with some values changed.
   Date copyWith({
-    int year,
-    int month,
-    int day,
+    int? year,
+    int? month,
+    int? day,
   }) {
     return new Date(
       year ?? this.year,

@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/days_page_view.dart';
+import 'package:flutter/material.dart';
 
 import 'utils/all.dart';
+
 
 class DaysPageViewExample extends StatefulWidget {
   @override
@@ -13,13 +12,13 @@ class DaysPageViewExample extends StatefulWidget {
 }
 
 class _DaysPageViewExampleState extends State<DaysPageViewExample> {
-  DaysPageController _daysPageController;
+  late DaysPageController _daysPageController;
 
-  Axis _scrollDirection;
-  bool _pageSnapping;
-  bool _reverse;
+  late Axis _scrollDirection;
+  late bool _pageSnapping;
+  late bool _reverse;
 
-  bool _isInitialisingDaysPageController;
+  late bool _isInitialisingDaysPageController;
 
   @override
   void initState() {
@@ -34,7 +33,7 @@ class _DaysPageViewExampleState extends State<DaysPageViewExample> {
 
   Future<void> _startInitialisationOfDaysPageController() async {
     if (_isInitialisingDaysPageController) {
-      return false;
+      return ;
     }
 
     _isInitialisingDaysPageController = true;
@@ -120,9 +119,9 @@ class _DaysPageViewExampleState extends State<DaysPageViewExample> {
                                 ),
                           )
                           .toList(),
-                      onChanged: (Axis value) {
+                      onChanged: (Axis? value) {
                         setState(() {
-                          this._scrollDirection = value;
+                          this._scrollDirection = value??Axis.vertical;
                         });
 
                         showScrollDirectionChangeMightNotWorkDialog(
@@ -135,9 +134,9 @@ class _DaysPageViewExampleState extends State<DaysPageViewExample> {
                   new CheckboxListTile(
                     title: new Text("Page Snapping"),
                     value: _pageSnapping,
-                    onChanged: (value) {
+                    onChanged: ( bool? value) {
                       setState(() {
-                        _pageSnapping = value;
+                        _pageSnapping = value??false;
                       });
                     },
                   ),
@@ -145,9 +144,9 @@ class _DaysPageViewExampleState extends State<DaysPageViewExample> {
                   new CheckboxListTile(
                     title: new Text("Reverse"),
                     value: _reverse,
-                    onChanged: (value) {
+                    onChanged: (bool? value) {
                       setState(() {
-                        _reverse = value;
+                        _reverse = value??false;
                       });
                     },
                   ),
@@ -161,7 +160,7 @@ class _DaysPageViewExampleState extends State<DaysPageViewExample> {
   }
 
   Widget _daysPageBuilder(BuildContext context, List<DateTime> days) {
-    return new Page.forDays(
+    return  CalenderPage.forDays(
       days: days,
     );
   }
@@ -169,7 +168,7 @@ class _DaysPageViewExampleState extends State<DaysPageViewExample> {
 
 class _DaysPageControllerInitialisationDialog extends StatefulWidget {
   _DaysPageControllerInitialisationDialog({
-    @required this.onConfirm,
+    required this.onConfirm,
   }) : assert(onConfirm != null);
 
   final ValueChanged<DaysPageController> onConfirm;
@@ -180,8 +179,8 @@ class _DaysPageControllerInitialisationDialog extends StatefulWidget {
 
 class _DaysPageControllerInitialisationDialogState
     extends State<_DaysPageControllerInitialisationDialog> {
-  DateTime _firstDayOfInitialPage;
-  int _daysPerPage;
+  late DateTime _firstDayOfInitialPage;
+  late int _daysPerPage;
 
   @override
   void initState() {
@@ -192,7 +191,7 @@ class _DaysPageControllerInitialisationDialogState
   }
 
   Future<void> _changeFirstDayOfInitialPage() async {
-    DateTime newFirstDayOfInitialPage = await showDatePicker(
+    DateTime? newFirstDayOfInitialPage = await showDatePicker(
       context: context,
       initialDate: _firstDayOfInitialPage,
       firstDate: new DateTime(2000),
@@ -217,7 +216,7 @@ class _DaysPageControllerInitialisationDialogState
           children: <Widget>[
             new ListTile(
               title: new Text("First Day Of Initial Page"),
-              trailing: new RaisedButton(
+              trailing: new ElevatedButton(
                 child: new Text("${dateToString(_firstDayOfInitialPage)}"),
                 onPressed: () {
                   _changeFirstDayOfInitialPage();

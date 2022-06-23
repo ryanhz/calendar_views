@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/src/_internal_date_time/all.dart';
 import 'package:calendar_views/src/calendar_page_view/all.dart';
+import 'package:flutter/material.dart';
 
 import '_page_days.dart';
 import 'days_page_builder.dart';
@@ -19,9 +17,9 @@ class DaysPageView extends CalendarPageView {
     Axis scrollDirection = CalendarPageView.default_scroll_direction,
     bool pageSnapping = CalendarPageView.default_page_snapping,
     bool reverse = CalendarPageView.default_reverse,
-    ScrollPhysics physics = CalendarPageView.default_physics,
-    DaysPageController controller,
-    @required this.pageBuilder,
+    ScrollPhysics? physics = CalendarPageView.default_physics,
+    DaysPageController? controller,
+    required this.pageBuilder,
     this.onDaysChanged,
   })  : this.controller = controller ?? new DaysPageController(),
         assert(controller != null),
@@ -42,21 +40,21 @@ class DaysPageView extends CalendarPageView {
   /// Called whenever the page and thus displayed days change.
   ///
   /// Properties of days except for year, month and day are set to their default values.
-  final ValueChanged<List<DateTime>> onDaysChanged;
+  final ValueChanged<List<DateTime>>? onDaysChanged;
 
   @override
   CalendarPageViewState createState() => new _DaysPageViewState();
 }
 
 class _DaysPageViewState extends CalendarPageViewState<DaysPageView> {
-  PageDays _pageDays;
+  late PageDays _pageDays;
 
   @override
   void initState() {
     super.initState();
 
     Date firstDayOfInitialPage = new Date.fromDateTime(
-      widget.controller.firstDayOfInitialPage,
+      widget.controller.firstDayOfInitialPage??DateTime.now(),
     );
     _pageDays = new PageDays(
       initialPage: CalendarPageViewState.initial_page,
@@ -110,8 +108,8 @@ class _DaysPageViewState extends CalendarPageViewState<DaysPageView> {
 
   Future<void> _animateToDay(
     DateTime day, {
-    @required Duration duration,
-    @required Curve curve,
+    required Duration duration,
+    required Curve curve,
   }) {
     Date d = new Date.fromDateTime(day);
     int page = _pageDays.pageOfDay(d);
@@ -128,8 +126,8 @@ class _DaysPageViewState extends CalendarPageViewState<DaysPageView> {
     if (widget.onDaysChanged != null) {
       List<Date> dates = _pageDays.daysOfPage(page);
       List<DateTime> days = _datesToDateTime(dates);
-
-      widget.onDaysChanged(days);
+      if(widget.onDaysChanged!= null)
+      widget.onDaysChanged!(days);
     }
   }
 

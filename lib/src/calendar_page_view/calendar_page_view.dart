@@ -12,7 +12,7 @@ abstract class CalendarPageView extends StatefulWidget {
   static const default_scroll_direction = Axis.horizontal;
   static const default_page_snapping = true;
   static const default_reverse = false;
-  static const ScrollPhysics default_physics = null;
+  static const ScrollPhysics? default_physics = null;
 
   CalendarPageView({
     this.scrollDirection = default_scroll_direction,
@@ -33,7 +33,7 @@ abstract class CalendarPageView extends StatefulWidget {
   final bool reverse;
 
   /// Same as [PageView.physics].
-  final ScrollPhysics physics;
+  final ScrollPhysics? physics;
 
   @override
   CalendarPageViewState createState();
@@ -45,7 +45,7 @@ abstract class CalendarPageViewState<WIDGET extends CalendarPageView>
   static const initial_page = 100000;
 
   @protected
-  PageController pageController;
+  late PageController pageController;
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ abstract class CalendarPageViewState<WIDGET extends CalendarPageView>
   /// Returns currently displayed page.
   @protected
   int getCurrentPage() {
-    return pageController.page.round();
+    return pageController.page?.round()??0;
   }
 
   /// Jumps to the given page.
@@ -75,8 +75,8 @@ abstract class CalendarPageViewState<WIDGET extends CalendarPageView>
   @protected
   Future<void> animateToPage(
     int page, {
-    @required Duration duration,
-    @required Curve curve,
+    required Duration duration,
+    required Curve curve,
   }) {
     return pageController.animateToPage(
       page,

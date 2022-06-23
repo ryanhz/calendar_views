@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/day_view.dart';
+import 'package:flutter/material.dart';
 
 /// Widget that builds a child in place of each day in a day view.
 class DayViewDaysHeader extends StatefulWidget {
   DayViewDaysHeader({
-    @required this.headerItemBuilder,
-  }) : assert(headerItemBuilder != null);
+    required this.headerItemBuilder,
+  });
 
   /// Function that builds a header item.
   final DayViewDaysHeaderItemBuilder headerItemBuilder;
@@ -17,12 +15,12 @@ class DayViewDaysHeader extends StatefulWidget {
 }
 
 class _DayViewDaysHeaderState extends State<DayViewDaysHeader> {
-  DayViewEssentialsState _dayViewEssentials;
+   DayViewEssentialsState? _dayViewEssentials;
 
-  HorizontalPositioner get _horizontalPositioner =>
-      _dayViewEssentials.horizontalPositioner;
+  HorizontalPositioner? get _horizontalPositioner =>
+      _dayViewEssentials?.horizontalPositioner;
 
-  DayViewProperties get _dayViewProperties => _horizontalPositioner.properties;
+  DayViewProperties? get _dayViewProperties => _horizontalPositioner?.properties;
 
   @override
   void didChangeDependencies() {
@@ -59,7 +57,7 @@ This widget must be a decendant of DayViewEssentials.
     );
 
     return new Container(
-      width: _horizontalPositioner.totalWidth,
+      width: _horizontalPositioner?.totalWidth,
       child: new IntrinsicHeight(
         child: new Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -70,17 +68,17 @@ This widget must be a decendant of DayViewEssentials.
   }
 
   Widget _buildStartingOffset() {
-    double width = _horizontalPositioner.eventAreaLeft;
+    double? width = _horizontalPositioner?.eventAreaLeft;
 
-    return new Container(
-      width: width,
+    return new SizedBox(
+      width: width??0,
     );
   }
 
   List<Widget> _buildDaysAndSeparations() {
     List<Widget> daysAndSeparations = <Widget>[];
 
-    List<DateTime> days = _dayViewProperties.days;
+    List<DateTime> days = _dayViewProperties?.days??[];
     for (int dayNumber = 0; dayNumber < days.length; dayNumber++) {
       DateTime day = days[dayNumber];
 
@@ -91,13 +89,13 @@ This widget must be a decendant of DayViewEssentials.
         ),
       );
 
-      if (_horizontalPositioner.isDaySeparationRightOfDay(dayNumber)) {
-        int daySeparationNumber =
-            _horizontalPositioner.daySeparationNumberRightOfDay(dayNumber);
+      if (_horizontalPositioner!.isDaySeparationRightOfDay(dayNumber)) {
+        int? daySeparationNumber =
+            _horizontalPositioner?.daySeparationNumberRightOfDay(dayNumber);
 
         daysAndSeparations.add(
           _buildDaySeparation(
-            daySeparationNumber: daySeparationNumber,
+            daySeparationNumber: daySeparationNumber??0,
           ),
         );
       }
@@ -107,20 +105,20 @@ This widget must be a decendant of DayViewEssentials.
   }
 
   Widget _buildDay({
-    @required int dayNumber,
-    @required DateTime day,
+    required int dayNumber,
+    required DateTime day,
   }) {
     return new Container(
-      width: _horizontalPositioner.dayAreaWidth(dayNumber),
+      width: _horizontalPositioner?.dayAreaWidth(dayNumber),
       child: widget.headerItemBuilder(context, day),
     );
   }
 
   Widget _buildDaySeparation({
-    @required int daySeparationNumber,
+    required int daySeparationNumber,
   }) {
     return new Container(
-      width: _horizontalPositioner.daySeparationAreaWidth(daySeparationNumber),
+      width: _horizontalPositioner?.daySeparationAreaWidth(daySeparationNumber),
     );
   }
 
@@ -130,7 +128,7 @@ This widget must be a decendant of DayViewEssentials.
     );
   }
 
-  double get _endingOffsetWidth =>
-      _horizontalPositioner.endMainAreaWidth +
-      _horizontalPositioner.endTotalAreaWidth;
+  double? get _endingOffsetWidth =>
+     ( _horizontalPositioner?.endMainAreaWidth??0) +
+      (_horizontalPositioner?.endTotalAreaWidth??0);
 }

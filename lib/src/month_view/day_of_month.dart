@@ -1,7 +1,6 @@
+import 'package:calendar_views/src/_internal_date_time/all.dart';
 import 'package:meta/meta.dart';
 import 'package:quiver/core.dart';
-
-import 'package:calendar_views/src/_internal_date_time/all.dart';
 
 import 'month_view.dart';
 
@@ -9,10 +8,9 @@ import 'month_view.dart';
 @immutable
 class DayOfMonth {
   DayOfMonth({
-    @required DateTime day,
-    @required DateTime month,
-  })  : assert(day != null),
-        assert(month != null),
+    required DateTime day,
+    required DateTime month,
+  })  : 
         this.day = new DateTime(day.year, day.month, day.day),
         this.month = new DateTime(month.year, month.month);
 

@@ -1,7 +1,6 @@
+import 'package:calendar_views/day_view.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-
-import 'package:calendar_views/day_view.dart';
 
 /// Signature for a function that returns height that some item with the given [durationInMinutes] should have inside a [DayViewSchedule].
 typedef double HeightOfDurationCallback(
@@ -17,10 +16,10 @@ typedef double MinuteOfDayFromTopCallback(
 @immutable
 class SchedulePositioner extends HorizontalPositioner {
   SchedulePositioner({
-    @required HorizontalPositioner horizontalPositioner,
-    @required this.heightPerMinute,
-    @required this.topExtensionHeight,
-    @required this.bottomExtensionHeight,
+    required HorizontalPositioner horizontalPositioner,
+    required this.heightPerMinute,
+    required this.topExtensionHeight,
+    required this.bottomExtensionHeight,
   })  : assert(heightPerMinute != null && heightPerMinute > 0.0),
         assert(topExtensionHeight != null && topExtensionHeight >= 0.0),
         assert(bottomExtensionHeight != null && bottomExtensionHeight >= 0.0),

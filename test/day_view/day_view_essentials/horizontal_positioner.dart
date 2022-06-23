@@ -1,6 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
-
 import 'package:calendar_views/src/day_view/day_view_essentials/all.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("HorizontalPositioner test", () {
@@ -22,7 +21,7 @@ void main() {
 
     double totalWidth = 100.0;
 
-    HorizontalPositioner horizontalPositioner;
+    late HorizontalPositioner horizontalPositioner;
 
     setUp(() {
       horizontalPositioner = new HorizontalPositioner(

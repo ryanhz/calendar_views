@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/day_view.dart';
+import 'package:flutter/material.dart';
 
 /// Widget for display a day view schedule with the given [components].
 class DayViewSchedule extends StatefulWidget {
@@ -9,7 +7,7 @@ class DayViewSchedule extends StatefulWidget {
     this.heightPerMinute,
     this.topExtensionHeight = 16.0,
     this.bottomExtensionHeight = 16.0,
-    @required this.components,
+    required this.components,
   })  : assert(heightPerMinute == null || heightPerMinute > 0.0),
         assert(topExtensionHeight != null && topExtensionHeight >= 0.0),
         assert(bottomExtensionHeight != null && bottomExtensionHeight >= 0.0),
@@ -18,7 +16,7 @@ class DayViewSchedule extends StatefulWidget {
   /// Height that a minute inside a [DayViewSchedule] will take.
   ///
   /// If null the [DayViewSchedule] will be as big as possible.
-  final double heightPerMinute;
+  final double? heightPerMinute;
 
   /// Height of extension above minimum minute of day.
   final double topExtensionHeight;
@@ -36,12 +34,12 @@ class DayViewSchedule extends StatefulWidget {
 }
 
 class _DayViewScheduleState extends State<DayViewSchedule> {
-  DayViewEssentialsState _dayViewEssentials;
+  DayViewEssentialsState? _dayViewEssentials;
 
-  DayViewProperties get _dayViewProperties => _dayViewEssentials.properties;
+  DayViewProperties get _dayViewProperties => _dayViewEssentials!.properties;
 
-  HorizontalPositioner get _horizontalPositioner =>
-      _dayViewEssentials.horizontalPositioner;
+  HorizontalPositioner? get _horizontalPositioner =>
+      _dayViewEssentials?.horizontalPositioner;
 
   @override
   void didChangeDependencies() {
@@ -65,15 +63,15 @@ This widget must be a decendant of DayViewEssentials.
     _throwErrorIfCannotDetermineHeightPerMinute(availableHeight);
 
     if (widget.heightPerMinute != null) {
-      return widget.heightPerMinute;
+      return widget.heightPerMinute!;
     } else {
       double heightWithoutExtensions = availableHeight -
           widget.topExtensionHeight -
           widget.bottomExtensionHeight;
 
-      int totalNumberOfMinutes = _dayViewProperties.totalNumberOfMinutes;
+      int? totalNumberOfMinutes = _dayViewProperties?.totalNumberOfMinutes;
 
-      return heightWithoutExtensions / totalNumberOfMinutes;
+      return heightWithoutExtensions / (totalNumberOfMinutes??1);
     }
   }
 
@@ -89,7 +87,7 @@ Eather heightPerMinute must be provider or this widget placed as a child of a wi
 
   SchedulePositioner _createSchedulePositioner(double heightPerMinute) {
     return new SchedulePositioner(
-      horizontalPositioner: _horizontalPositioner,
+      horizontalPositioner: _horizontalPositioner!,
       heightPerMinute: heightPerMinute,
       topExtensionHeight: widget.topExtensionHeight,
       bottomExtensionHeight: widget.bottomExtensionHeight,
@@ -121,8 +119,8 @@ Eather heightPerMinute must be provider or this widget placed as a child of a wi
   }
 
   List<Positioned> _buildComponentItems({
-    @required BuildContext context,
-    @required SchedulePositioner positioner,
+    required BuildContext context,
+    required SchedulePositioner positioner,
   }) {
     List<Positioned> items = <Positioned>[];
 

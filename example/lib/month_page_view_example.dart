@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:calendar_views/month_page_view.dart';
+import 'package:flutter/material.dart';
 
 import 'utils/all.dart';
 
@@ -10,13 +9,13 @@ class MonthPageViewExample extends StatefulWidget {
 }
 
 class _MonthPageViewExampleState extends State<MonthPageViewExample> {
-  MonthPageController _monthPageController;
+  late MonthPageController _monthPageController;
 
-  Axis _scrollDirection;
-  bool _pageSnapping;
-  bool _reverse;
+  late Axis _scrollDirection;
+  late bool _pageSnapping;
+  late bool _reverse;
 
-  String _displayedMonthText;
+  late String _displayedMonthText;
 
   @override
   void initState() {
@@ -98,9 +97,9 @@ class _MonthPageViewExampleState extends State<MonthPageViewExample> {
                                 ),
                           )
                           .toList(),
-                      onChanged: (Axis value) {
+                      onChanged: (Axis? value) {
                         setState(() {
-                          this._scrollDirection = value;
+                          this._scrollDirection = value??Axis.vertical;
                         });
 
                         showScrollDirectionChangeMightNotWorkDialog(
@@ -113,9 +112,9 @@ class _MonthPageViewExampleState extends State<MonthPageViewExample> {
                   new CheckboxListTile(
                     title: new Text("Page snapping"),
                     value: _pageSnapping,
-                    onChanged: (value) {
+                    onChanged: (bool?value) {
                       setState(() {
-                        _pageSnapping = value;
+                        _pageSnapping = value??false;
                       });
                     },
                   ),
@@ -123,9 +122,9 @@ class _MonthPageViewExampleState extends State<MonthPageViewExample> {
                   new CheckboxListTile(
                     title: new Text("Reverse"),
                     value: _reverse,
-                    onChanged: (value) {
+                    onChanged: (bool? value) {
                       setState(() {
-                        _reverse = value;
+                        _reverse = value??false;
                       });
                     },
                   ),
@@ -139,7 +138,7 @@ class _MonthPageViewExampleState extends State<MonthPageViewExample> {
   }
 
   Widget _monthPageBuilder(BuildContext context, DateTime month) {
-    return new Page.forMonth(
+    return new CalenderPage.forMonth(
       month: month,
     );
   }

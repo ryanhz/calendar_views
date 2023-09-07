@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:calendar_views/month_view.dart';
+import 'package:flutter/material.dart';
 
 import 'utils/all.dart';
 
@@ -10,13 +9,13 @@ class MonthViewExample extends StatefulWidget {
 }
 
 class _MonthViewExampleState extends State<MonthViewExample> {
-  DateTime _month;
-  int _firstWeekday;
+  late DateTime _month;
+  late int _firstWeekday;
 
-  bool _shouldShowHeader;
+  late bool _shouldShowHeader;
 
-  bool _showExtendedDaysBefore;
-  bool _showExtendedDaysAfter;
+  late bool _showExtendedDaysBefore;
+  late bool _showExtendedDaysAfter;
 
   @override
   void initState() {
@@ -81,9 +80,9 @@ class _MonthViewExampleState extends State<MonthViewExample> {
                     title: new Text("First Weekday"),
                     trailing: new WeekdayDropDownButton(
                         value: _firstWeekday,
-                        onChanged: (value) {
+                        onChanged: (int? value) {
                           setState(() {
-                            _firstWeekday = value;
+                            _firstWeekday = value!;
                           });
                         }),
                   ),
@@ -93,7 +92,7 @@ class _MonthViewExampleState extends State<MonthViewExample> {
                     value: _shouldShowHeader,
                     onChanged: (value) {
                       setState(() {
-                        _shouldShowHeader = value;
+                        _shouldShowHeader = value!;
                       });
                     },
                   ),
@@ -103,7 +102,7 @@ class _MonthViewExampleState extends State<MonthViewExample> {
                     value: _showExtendedDaysBefore,
                     onChanged: (value) {
                       setState(() {
-                        _showExtendedDaysBefore = value;
+                        _showExtendedDaysBefore = value!;
                       });
                     },
                   ),
@@ -113,7 +112,7 @@ class _MonthViewExampleState extends State<MonthViewExample> {
                     value: _showExtendedDaysAfter,
                     onChanged: (value) {
                       setState(() {
-                        _showExtendedDaysAfter = value;
+                        _showExtendedDaysAfter = value!;
                       });
                     },
                   ),

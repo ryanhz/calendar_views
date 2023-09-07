@@ -1,6 +1,5 @@
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/day_view.dart';
+import 'package:meta/meta.dart';
 
 /// [EventViewArranger] that tries to equally separate overlapping events.
 @immutable
@@ -147,7 +146,7 @@ void setAbstractWidthAndLeft(_Item item) {
   if (item.earlyOverlaps.isEmpty) {
     beforeWidth = 0.0;
   } else {
-    _Item itemBeforeTheItem;
+    _Item? itemBeforeTheItem;
 
     for (_Item earlyOverlap in item.earlyOverlaps) {
       if (itemBeforeTheItem == null ||
@@ -157,7 +156,7 @@ void setAbstractWidthAndLeft(_Item item) {
     }
 
     beforeWidth =
-        itemBeforeTheItem.abstractLeft + itemBeforeTheItem.abstractWidth;
+        (itemBeforeTheItem?.abstractLeft??0) + (itemBeforeTheItem?.abstractWidth??0);
   }
 
   item.abstractWidth = (100 - beforeWidth) / (1 + item.maxRight);
@@ -172,8 +171,8 @@ void setAbstractWidthAndLeft(_Item item) {
 
 class _Item {
   _Item({
-    @required this.id,
-    @required this.event,
+    required this.id,
+    required this.event,
   })  : assert(id != null),
         assert(event != null);
 
@@ -181,11 +180,11 @@ class _Item {
 
   final StartDurationItem event;
 
-  List<_Item> earlyOverlaps;
+  List<_Item> earlyOverlaps=[];
 
-  List<_Item> lateOverlaps;
+  List<_Item> lateOverlaps=[];
 
-  int maxRight;
+  int maxRight=0;
 
   /// between 0 - 100
   double abstractLeft = 0.0;

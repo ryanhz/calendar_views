@@ -1,7 +1,6 @@
+import 'package:calendar_views/day_view.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-
-import 'package:calendar_views/day_view.dart';
 
 /// Signature for a function that builds a generated day separator.
 typedef Positioned GeneratedDaySeparatorBuilder(
@@ -17,7 +16,7 @@ class DaySeparationComponent implements ScheduleComponent {
   DaySeparationComponent({
     this.extendOverTopExtension = false,
     this.extendOverBottomExtension = false,
-    @required this.generatedDaySeparatorBuilder,
+    required this.generatedDaySeparatorBuilder,
   })  : assert(extendOverTopExtension != null),
         assert(extendOverBottomExtension != null),
         assert(generatedDaySeparatorBuilder != null);
@@ -32,8 +31,8 @@ class DaySeparationComponent implements ScheduleComponent {
   final GeneratedDaySeparatorBuilder generatedDaySeparatorBuilder;
 
   ItemPosition _makeItemPosition({
-    @required SchedulePositioner positioner,
-    @required daySeparatorNumber,
+    required SchedulePositioner positioner,
+    required daySeparatorNumber,
   }) {
     double top;
     if (extendOverTopExtension) {
@@ -49,8 +48,8 @@ class DaySeparationComponent implements ScheduleComponent {
   }
 
   ItemSize _makeItemSize({
-    @required SchedulePositioner positioner,
-    @required int daySeparatorNumber,
+    required SchedulePositioner positioner,
+    required int daySeparatorNumber,
   }) {
     double height = positioner.totalHeight;
     if (!extendOverTopExtension) {

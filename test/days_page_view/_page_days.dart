@@ -1,7 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:calendar_views/src/days_page_view/_page_days.dart';
 import 'package:calendar_views/src/_internal_date_time/all.dart';
+import 'package:calendar_views/src/days_page_view/_page_days.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("PageDays test", () {
@@ -12,9 +11,9 @@ void main() {
 
 void testDaysOfPage() {
   group(".daysOfPage, daysPerPage is 4", () {
-    PageDays pageDays;
-    List<Date> actual;
-    List<Date> matcher;
+    late PageDays pageDays;
+    late List<Date> actual;
+    late List<Date> matcher;
 
     int initialPage = 10;
 
@@ -88,9 +87,9 @@ void testDaysOfPage() {
   });
 
   group(".daysOfPage, daysPerPage is 1", () {
-    PageDays pageDays;
-    List<Date> actual;
-    List<Date> matcher;
+    late  PageDays pageDays;
+    late List<Date> actual;
+    late List<Date> matcher;
 
     int initialPage = 10;
 
@@ -151,9 +150,9 @@ void testDaysOfPage() {
 
 void testPageOfDay() {
   group(".pageOfDay, daysPerPage is 4", () {
-    PageDays pageDays;
-    int actual;
-    int matcher;
+    late PageDays pageDays;
+    late int actual;
+    late int matcher;
 
     int initialPage = 10;
 
@@ -216,9 +215,9 @@ void testPageOfDay() {
   });
 
   group(".pageOfDay, daysPerPage is 1", () {
-    PageDays pageDays;
-    int actual;
-    int matcher;
+    late PageDays pageDays;
+    late int actual;
+    late int matcher;
 
     int initialPage = 10;
 

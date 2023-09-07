@@ -5,13 +5,13 @@ import 'date_time_to_string.dart';
 /// A simple widget that shows a checkbox and some date-time information.
 ///
 /// This widget uses [AutomaticKeepAliveClientMixin].
-class Page extends StatefulWidget {
-  Page.forDays({
-    @required this.days,
+class CalenderPage extends StatefulWidget {
+  CalenderPage.forDays({
+     required this.days,
   }) : showDayOfMonth = true;
 
-  Page.forMonth({
-    @required DateTime month,
+  CalenderPage.forMonth({
+     required DateTime month,
   })  : showDayOfMonth = false,
         days = <DateTime>[month];
 
@@ -22,8 +22,8 @@ class Page extends StatefulWidget {
   _PageState createState() => new _PageState();
 }
 
-class _PageState extends State<Page> with AutomaticKeepAliveClientMixin<Page> {
-  bool _isChecked;
+class _PageState extends State<CalenderPage> with AutomaticKeepAliveClientMixin<CalenderPage> {
+  late bool _isChecked;
 
   @override
   bool get wantKeepAlive => true;
@@ -56,9 +56,9 @@ class _PageState extends State<Page> with AutomaticKeepAliveClientMixin<Page> {
             padding: new EdgeInsets.all(4.0),
             child: new Checkbox(
                 value: _isChecked,
-                onChanged: (value) {
+                onChanged: (bool? value) {
                   setState(() {
-                    _isChecked = value;
+                    _isChecked = value!;
                   });
                 }),
           ),

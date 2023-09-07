@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-
 import 'package:calendar_views/day_view.dart';
 import 'package:calendar_views/src/_internal_date_time/all.dart';
+import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 /// Signature for a function that builds a generated support line.
 typedef Positioned GeneratedSupportLineBuilder(
@@ -16,8 +15,8 @@ typedef Positioned GeneratedSupportLineBuilder(
 @immutable
 class SupportLineComponent implements ScheduleComponent {
   SupportLineComponent._internal({
-    @required this.extendOverStartMainArea,
-    @required this.extendOverEndMainArea,
+    required this.extendOverStartMainArea,
+    required this.extendOverEndMainArea,
     this.supportLines,
     this.minuteOfDayOfFirstSupportLine,
     this.interval,
@@ -29,7 +28,7 @@ class SupportLineComponent implements ScheduleComponent {
   factory SupportLineComponent({
     bool extendOverStartMainArea = true,
     bool extendOverEndMainArea = true,
-    @required List<TimeItem> supportLines,
+    required List<TimeItem> supportLines,
   }) {
     assert(supportLines != null);
 
@@ -46,7 +45,7 @@ class SupportLineComponent implements ScheduleComponent {
     bool extendOverEndMainArea = true,
     int minuteOfDayOfFirstSupportLine = 0,
     int interval = 60,
-    @required GeneratedSupportLineBuilder generatedSupportLineBuilder,
+    required GeneratedSupportLineBuilder generatedSupportLineBuilder,
   }) {
     assert(minuteOfDayOfFirstSupportLine != null &&
         isMinuteOfDayValid(minuteOfDayOfFirstSupportLine));
@@ -70,23 +69,23 @@ class SupportLineComponent implements ScheduleComponent {
 
   // provided support lines ----------------------------------------------------
   /// List of support lines to be displayed by this component.
-  final List<TimeItem> supportLines;
+  final List<TimeItem>? supportLines;
 
   // generated support lines ---------------------------------------------------
   /// Minute of day at which the first generated support line will be displayed.
-  final int minuteOfDayOfFirstSupportLine;
+  final int? minuteOfDayOfFirstSupportLine;
 
   /// Number of minutes between generated support lines.
-  final int interval;
+  final int? interval;
 
   /// Function that builds a generated support line.
-  final GeneratedSupportLineBuilder generatedSupportLineBuilder;
+  final GeneratedSupportLineBuilder? generatedSupportLineBuilder;
 
   bool get _shouldGenerateSupportLines => supportLines == null;
 
   ItemPosition _makeItemPosition({
-    @required SchedulePositioner positioner,
-    @required int minuteOfDay,
+    required SchedulePositioner positioner,
+    required int minuteOfDay,
   }) {
     double left;
     if (extendOverStartMainArea) {
@@ -102,7 +101,7 @@ class SupportLineComponent implements ScheduleComponent {
   }
 
   double _calculateItemWidth({
-    @required SchedulePositioner positioner,
+    required SchedulePositioner positioner,
   }) {
     double width = positioner.mainAreaWidth;
     if (!extendOverStartMainArea) {
@@ -135,14 +134,14 @@ class SupportLineComponent implements ScheduleComponent {
   }
 
   List<Positioned> _buildGeneratedSupportLines({
-    @required BuildContext context,
-    @required SchedulePositioner positioner,
+    required BuildContext context,
+    required SchedulePositioner positioner,
   }) {
     List<Positioned> items = <Positioned>[];
 
-    for (int minuteOfDay = minuteOfDayOfFirstSupportLine;
+    for (int minuteOfDay = minuteOfDayOfFirstSupportLine??0;
         minuteOfDay <= maximum_minute_of_day;
-        minuteOfDay += interval) {
+        minuteOfDay += interval??0) {
       ItemPosition itemPosition = _makeItemPosition(
         positioner: positioner,
         minuteOfDay: minuteOfDay,
@@ -152,7 +151,7 @@ class SupportLineComponent implements ScheduleComponent {
         positioner: positioner,
       );
 
-      Positioned item = generatedSupportLineBuilder(
+      Positioned item = generatedSupportLineBuilder!(
         context,
         itemPosition,
         itemWidth,
@@ -166,12 +165,12 @@ class SupportLineComponent implements ScheduleComponent {
   }
 
   List<Positioned> _buildProvidedSupportLines({
-    @required BuildContext context,
-    @required SchedulePositioner positioner,
+    required BuildContext context,
+    required SchedulePositioner positioner,
   }) {
     List<Positioned> items = <Positioned>[];
 
-    for (TimeItem timeItem in supportLines) {
+    for (TimeItem timeItem in supportLines??[]) {
       ItemPosition itemPosition = _makeItemPosition(
         positioner: positioner,
         minuteOfDay: timeItem.minuteOfDay,

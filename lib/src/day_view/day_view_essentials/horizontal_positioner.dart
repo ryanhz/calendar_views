@@ -8,9 +8,9 @@ import 'day_view_widths.dart';
 @immutable
 class HorizontalPositioner {
   HorizontalPositioner({
-    @required this.properties,
-    @required this.widths,
-    @required this.totalWidth,
+    required this.properties,
+    required this.widths,
+    required this.totalWidth,
   })  : assert(properties != null),
         assert(widths != null),
         assert(totalWidth != null && totalWidth >= 0);
@@ -298,7 +298,7 @@ class HorizontalPositioner {
   /// Returns the daySeparationNumber of [DayViewArea.daySeparationArea] that is to the left of the given day.
   ///
   /// If there is no day separation to the left of day it returns null.
-  int daySeparationNumberLeftOfDay(int dayNumber) {
+  int? daySeparationNumberLeftOfDay(int dayNumber) {
     throwArgumentErrorIfInvalidDayNumber(dayNumber);
 
     if (isDaySeparationLeftOfDay(dayNumber)) {
@@ -311,7 +311,7 @@ class HorizontalPositioner {
   /// Returns the daySeparationNumber of [DayViewArea.daySeparationArea] that is to the right of the given day.
   ///
   /// If there is no day separation to the right of day it returns null.
-  int daySeparationNumberRightOfDay(int dayNumber) {
+  int? daySeparationNumberRightOfDay(int dayNumber) {
     throwArgumentErrorIfInvalidDayNumber(dayNumber);
 
     if (isDaySeparationRightOfDay(dayNumber)) {

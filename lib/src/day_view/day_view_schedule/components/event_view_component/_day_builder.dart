@@ -1,17 +1,16 @@
+import 'package:calendar_views/day_view.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-
-import 'package:calendar_views/day_view.dart';
 
 /// Class that builds events of a day displayed by [EventViewComponent].
 @immutable
 class DayBuilder {
   DayBuilder({
-    @required this.context,
-    @required this.dayNumber,
-    @required this.events,
-    @required this.eventArranger,
-    @required this.positioner,
+    required this.context,
+    required this.dayNumber,
+    required this.events,
+    required this.eventArranger,
+    required this.positioner,
   })  : assert(context != null),
         assert(dayNumber != null),
         assert(events != null),
